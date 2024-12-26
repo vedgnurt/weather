@@ -71,74 +71,83 @@ const App = () => {
                         </div>
                     </div>
                 </header>
-                <section
-                    className={twMerge(
-                        "flex justify-between items-center gap-4"
-                    )}
-                >
-                    <div className={twMerge("flex items-start")}>
-                        <p className={twMerge("text-8xl font-medium")}>
-                            {locationWeather.main.temp}
-                        </p>
-                        <p className={twMerge("text-xl font-semibold", "mt-3")}>
-                            &#8451;
-                        </p>
-                    </div>
-                    <img
-                        className={twMerge("w-24 aspect-square object-cover")}
-                        src={`https://openweathermap.org/img/wn/${locationWeather.weather[0].icon}@2x.png`}
-                    />
-                    <div className={twMerge("space-y-2")}>
-                        <p
-                            className={twMerge(
-                                "flex items-center gap-1",
-                                "text-sm font-semibold"
-                            )}
-                        >
-                            <span
+                {locationWeather && (
+                    <section
+                        className={twMerge(
+                            "flex justify-between items-center gap-4"
+                        )}
+                    >
+                        <div className={twMerge("flex items-start")}>
+                            <p className={twMerge("text-8xl font-medium")}>
+                                {locationWeather.main.temp}
+                            </p>
+                            <p
                                 className={twMerge(
-                                    "first-letter:uppercase",
-                                    "text-gray-100/75"
+                                    "text-xl font-semibold",
+                                    "mt-3"
                                 )}
                             >
-                                mức độ mây:
-                            </span>
-                            <span>{locationWeather.clouds.all}%</span>
-                        </p>
-                        <p
+                                &#8451;
+                            </p>
+                        </div>
+                        <img
                             className={twMerge(
-                                "flex items-center gap-1",
-                                "text-sm font-semibold"
+                                "w-24 aspect-square object-cover"
                             )}
-                        >
-                            <span
+                            src={`https://openweathermap.org/img/wn/${locationWeather.weather[0].icon}@2x.png`}
+                        />
+                        <div className={twMerge("space-y-2")}>
+                            <p
                                 className={twMerge(
-                                    "first-letter:uppercase",
-                                    "text-gray-100/75"
+                                    "flex items-center gap-1",
+                                    "text-sm font-semibold"
                                 )}
                             >
-                                độ ẩm:
-                            </span>
-                            <span>{locationWeather.main.temp}%</span>
-                        </p>
-                        <p
-                            className={twMerge(
-                                "flex items-center gap-1",
-                                "text-sm font-semibold"
-                            )}
-                        >
-                            <span
+                                <span
+                                    className={twMerge(
+                                        "first-letter:uppercase",
+                                        "text-gray-100/75"
+                                    )}
+                                >
+                                    mức độ mây:
+                                </span>
+                                <span>{locationWeather.clouds.all}%</span>
+                            </p>
+                            <p
                                 className={twMerge(
-                                    "first-letter:uppercase",
-                                    "text-gray-100/75"
+                                    "flex items-center gap-1",
+                                    "text-sm font-semibold"
                                 )}
                             >
-                                tốc độ gió:
-                            </span>
-                            <span>{locationWeather.wind.speed}km/h</span>
-                        </p>
-                    </div>
-                </section>
+                                <span
+                                    className={twMerge(
+                                        "first-letter:uppercase",
+                                        "text-gray-100/75"
+                                    )}
+                                >
+                                    độ ẩm:
+                                </span>
+                                <span>{locationWeather.main.temp}%</span>
+                            </p>
+                            <p
+                                className={twMerge(
+                                    "flex items-center gap-1",
+                                    "text-sm font-semibold"
+                                )}
+                            >
+                                <span
+                                    className={twMerge(
+                                        "first-letter:uppercase",
+                                        "text-gray-100/75"
+                                    )}
+                                >
+                                    tốc độ gió:
+                                </span>
+                                <span>{locationWeather.wind.speed}km/h</span>
+                            </p>
+                        </div>
+                    </section>
+                )}
             </div>
         </section>
     );
