@@ -27,7 +27,6 @@ const App = () => {
             return data;
         },
         enabled: location !== "",
-        refetchOnWindowFocus: false,
     });
 
     return (
