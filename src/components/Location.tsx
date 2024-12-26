@@ -1,10 +1,14 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import axios from "axios";
 import { twMerge } from "tailwind-merge";
 
-const Location = () => {
-    const [location, setLocation] = useState("");
-
+const Location = ({
+    location,
+    setLocation,
+}: {
+    location: string;
+    setLocation: React.Dispatch<React.SetStateAction<string>>;
+}) => {
     useEffect(() => {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
