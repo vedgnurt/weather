@@ -10,26 +10,25 @@ import { Location, TimeDisplay, TodayDay } from "./components";
 const App = () => {
     const [location, setLocation] = useState("");
 
-    const { data: locationWeather, isSuccess: isLocationWeatherSuccess } =
-        useQuery({
-            queryKey: ["weather", location],
-            queryFn: async () => {
-                const { data } = await axios.get(
-                    import.meta.env.VITE_WEATHER_API_CALL,
-                    {
-                        params: {
-                            q: location,
-                            appid: import.meta.env.VITE_WEATHER_API_KEY,
-                            units: "metric",
-                        },
-                    }
-                );
+    const { data: locationWeather } = useQuery({
+        queryKey: ["weather", location],
+        queryFn: async () => {
+            const { data } = await axios.get(
+                import.meta.env.VITE_WEATHER_API_CALL,
+                {
+                    params: {
+                        q: location,
+                        appid: import.meta.env.VITE_WEATHER_API_KEY,
+                        units: "metric",
+                    },
+                }
+            );
 
-                return data;
-            },
-            enabled: location !== "",
-            refetchOnWindowFocus: false,
-        });
+            return data;
+        },
+        enabled: location !== "",
+        refetchOnWindowFocus: false,
+    });
 
     return (
         <section
@@ -72,84 +71,74 @@ const App = () => {
                         </div>
                     </div>
                 </header>
-                {isLocationWeatherSuccess && (
-                    <section
-                        className={twMerge(
-                            "flex justify-between items-center gap-4"
-                        )}
-                    >
-                        <div className={twMerge("flex items-start")}>
-                            <p className={twMerge("text-8xl font-medium")}>
-                                {locationWeather.main.temp}
-                            </p>
-                            <p
-                                className={twMerge(
-                                    "text-xl font-semibold",
-                                    "mt-3"
-                                )}
-                            >
-                                &#8451;
-                            </p>
-                        </div>
-                        <img
+                <section
+                    className={twMerge(
+                        "flex justify-between items-center gap-4"
+                    )}
+                >
+                    <div className={twMerge("flex items-start")}>
+                        <p className={twMerge("text-8xl font-medium")}>
+                            {locationWeather.main.temp}
+                        </p>
+                        <p className={twMerge("text-xl font-semibold", "mt-3")}>
+                            &#8451;
+                        </p>
+                    </div>
+                    <img
+                        className={twMerge("w-24 aspect-square object-cover")}
+                        src={`https://openweathermap.org/img/wn/${locationWeather.weather[0].icon}@2x.png`}
+                    />
+                    <div className={twMerge("space-y-2")}>
+                        <p
                             className={twMerge(
-                                "w-24 aspect-square object-cover"
+                                "flex items-center gap-1",
+                                "text-sm font-semibold"
                             )}
-                            src={`https://openweathermap.org/img/wn/${locationWeather.weather[0].icon}@2x.png`}
-                        />
-                        <div className={twMerge("space-y-2")}>
-                            <p
+                        >
+                            <span
                                 className={twMerge(
-                                    "flex items-center gap-1",
-                                    "text-sm font-semibold"
+                                    "first-letter:uppercase",
+                                    "text-gray-100/75"
                                 )}
                             >
-                                <span
-                                    className={twMerge(
-                                        "first-letter:uppercase",
-                                        "text-gray-100/75"
-                                    )}
-                                >
-                                    mức độ mây:
-                                </span>
-                                <span>{locationWeather.clouds.all}%</span>
-                            </p>
-                            <p
+                                mức độ mây:
+                            </span>
+                            <span>{locationWeather.clouds.all}%</span>
+                        </p>
+                        <p
+                            className={twMerge(
+                                "flex items-center gap-1",
+                                "text-sm font-semibold"
+                            )}
+                        >
+                            <span
                                 className={twMerge(
-                                    "flex items-center gap-1",
-                                    "text-sm font-semibold"
+                                    "first-letter:uppercase",
+                                    "text-gray-100/75"
                                 )}
                             >
-                                <span
-                                    className={twMerge(
-                                        "first-letter:uppercase",
-                                        "text-gray-100/75"
-                                    )}
-                                >
-                                    độ ẩm:
-                                </span>
-                                <span>{locationWeather.main.temp}%</span>
-                            </p>
-                            <p
+                                độ ẩm:
+                            </span>
+                            <span>{locationWeather.main.temp}%</span>
+                        </p>
+                        <p
+                            className={twMerge(
+                                "flex items-center gap-1",
+                                "text-sm font-semibold"
+                            )}
+                        >
+                            <span
                                 className={twMerge(
-                                    "flex items-center gap-1",
-                                    "text-sm font-semibold"
+                                    "first-letter:uppercase",
+                                    "text-gray-100/75"
                                 )}
                             >
-                                <span
-                                    className={twMerge(
-                                        "first-letter:uppercase",
-                                        "text-gray-100/75"
-                                    )}
-                                >
-                                    tốc độ gió:
-                                </span>
-                                <span>{locationWeather.wind.speed}km/h</span>
-                            </p>
-                        </div>
-                    </section>
-                )}
-                <footer></footer>
+                                tốc độ gió:
+                            </span>
+                            <span>{locationWeather.wind.speed}km/h</span>
+                        </p>
+                    </div>
+                </section>
             </div>
         </section>
     );
